@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
         lastShootTime = Time.time;
         curAmmo--;
 
-        GameObject bul = Instantiate(bullet,muzzle.position,muzzle.rotation);
+        GameObject bul = BulletPool.InstantiateBullet(bullet,muzzle);
         bul.GetComponent<Rigidbody>().velocity = muzzle.forward * bulletSpeed;
     }
 }
