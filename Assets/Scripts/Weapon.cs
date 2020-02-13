@@ -5,32 +5,33 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject bullet;
-    public Transform muzzle;
+    private Transform muzzle;
 
-    public int curAmmo;
+    public int currentAmmo;
     public int maxAmmo;
-    public bool infinitAmmo;
+    private bool infinitAmmo;
 
     public float bulletSpeed;
 
     public float shootRate;
     private float lastShootTime;
-    private bool isPlayer;
 
     private void Awake()
     {
-        //find out if we are the player
-        if (GetComponent<Player>())
-        {
-            isPlayer = true;
-        }
+        muzzle = transform.Find("weapon/Muzzle");
+
+        if (!muzzle)
+            muzzle = transform.Find("Main Camera/weapon/Muzzle");     
+
+        else
+            infinitAmmo = true;
     }
 
     public bool CanShoot()
     {
         if (Time.time - lastShootTime >= shootRate)
         {
-            if (curAmmo>0 || infinitAmmo)
+            if (currentAmmo>0 || infinitAmmo)
                 return true;
         }
 
@@ -40,7 +41,7 @@ public class Weapon : MonoBehaviour
     public void Shoot()
     {
         lastShootTime = Time.time;
-        curAmmo--;
+        currentAmmo--;
 
         GameObject bul = BulletPool.InstantiateBullet(bullet,muzzle);
         bul.GetComponent<Rigidbody>().velocity = muzzle.forward * bulletSpeed;

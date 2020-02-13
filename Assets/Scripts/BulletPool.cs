@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class BulletPool
 {
-    public static List<GameObject> enabledBullets = new List<GameObject>();
-    public static List<GameObject> disabledBullets = new List<GameObject>();
+    private static List<GameObject> enabledBullets = new List<GameObject>();
+    private static List<GameObject> disabledBullets = new List<GameObject>();
 
     public static GameObject InstantiateBullet(GameObject bullet,Transform muzzle)
     {
@@ -23,5 +23,13 @@ public static class BulletPool
         tempBullet.SetActive(true);
 
         return tempBullet;
+    }
+
+    public static void DisableBullet(GameObject bullet)
+    {
+        bullet.SetActive(false);
+
+        enabledBullets.Remove(bullet);
+        disabledBullets.Add(bullet);
     }
 }
