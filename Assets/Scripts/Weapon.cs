@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public GameObject bullet;
-    private Transform muzzle;
-
     public int currentAmmo;
     public int maxAmmo;
     private bool infinitAmmo;
@@ -15,6 +12,12 @@ public class Weapon : MonoBehaviour
 
     public float shootRate;
     private float lastShootTime;
+
+    public AudioClip shootClip;
+    private AudioSource audioSource;
+
+    public GameObject bullet;
+    private Transform muzzle;
 
     private void Awake()
     {
@@ -25,6 +28,8 @@ public class Weapon : MonoBehaviour
 
         else
             infinitAmmo = true;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public bool CanShoot()
@@ -45,5 +50,7 @@ public class Weapon : MonoBehaviour
 
         GameObject bul = BulletPool.InstantiateBullet(bullet,muzzle);
         bul.GetComponent<Rigidbody>().velocity = muzzle.forward * bulletSpeed;
+
+        audioSource.PlayOneShot(shootClip);
     }
 }

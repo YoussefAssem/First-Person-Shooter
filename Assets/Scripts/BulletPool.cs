@@ -7,6 +7,12 @@ public static class BulletPool
     private static List<GameObject> enabledBullets = new List<GameObject>();
     private static List<GameObject> disabledBullets = new List<GameObject>();
 
+    public static void PoolInit()
+    {
+        enabledBullets.Clear();
+        disabledBullets.Clear();
+    }
+
     public static GameObject InstantiateBullet(GameObject bullet,Transform muzzle)
     {
         if (disabledBullets.Count == 0)

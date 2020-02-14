@@ -12,21 +12,37 @@ public class Character : MonoBehaviour
     public int maxHP;
 
     private Weapon weapon;
-
+    private bool isPlayer;
     private void Start()
     {
+        isPlayer = gameObject.CompareTag("Player");
         weapon = GetComponent<Weapon>();
+
+        if (isPlayer)
+        {
+            UImanager.uiManager.UpdateAmmo(weapon.currentAmmo, weapon.maxAmmo);
+            UImanager.uiManager.UpdateHealthBar(currentHP, maxHP);
+            UImanager.uiManager.UpdateScore(0);
+        }
     }
 
     public void Shoot()
     {
         if (weapon.CanShoot())
             weapon.Shoot();
+
+        if (isPlayer)
+            UImanager.uiManager.UpdateAmmo(weapon.currentAmmo, weapon.maxAmmo);
     }
 
     public void TakeDamage(int damage)
     {
-        currentHP -= damage;
+        currentHP = Mathf.Clamp(currentHP - damage,0,maxHP);
+
+        if (isPlayer)
+            UImanager.uiManager.UpdateHealthBar(currentHP, maxHP);
+        else
+            GameManager.gameManager.AddScore(10);
 
         if (currentHP <= 0)
             Die();
@@ -34,19 +50,28 @@ public class Character : MonoBehaviour
 
     private void Die()
     {
-        if (gameObject.CompareTag("Enemy"))
+        if (isPlayer)
+        {
+            GameManager.gameManager.LoseGame();
+        }
+        else
+        {
+            GameManager.gameManager.AddScore(100);
             Destroy(gameObject);
-
-        //else logic for player
+        } 
     }
 
     public void TakeHP(int amount)
     {
         currentHP = Mathf.Clamp(currentHP + amount, 1, maxHP);
+
+        UImanager.uiManager.UpdateHealthBar(currentHP,maxHP);
     }
 
     public void TakeAmmo(int amount)
     {
         weapon.currentAmmo = Mathf.Clamp(weapon.currentAmmo + amount, 1, weapon.maxAmmo);
+
+        UImanager.uiManager.UpdateAmmo(weapon.currentAmmo, weapon.maxAmmo);
     }
 }

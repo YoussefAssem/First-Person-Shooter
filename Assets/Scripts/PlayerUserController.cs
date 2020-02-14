@@ -23,6 +23,9 @@ public class PlayerUserController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameManager.gamePaused)
+            return;
+
         CamLook();
 
         float horizontal = Input.GetAxis("Horizontal");

@@ -142,6 +142,7 @@ MonoBehaviour:
   offset: 1
   moveSpeed: 1
   rotation: 60
+  pickupClip: {fileID: 8300000, guid: 47818e006d52d5145b768be3519fc28f, type: 3}
 --- !u!1 &7605322842921700782
 GameObject:
   m_ObjectHideFlags: 0

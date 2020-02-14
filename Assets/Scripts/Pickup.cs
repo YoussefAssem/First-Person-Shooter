@@ -16,6 +16,8 @@ public class Pickup : MonoBehaviour
     private Vector3 pos1;
     private Vector3 pos2;
 
+    public AudioClip pickupClip;
+
     private void Start()
     {
         pos1 = transform.position;
@@ -55,6 +57,8 @@ public class Pickup : MonoBehaviour
                 default:
                     break;
             }
+
+            other.GetComponent<AudioSource>().PlayOneShot(pickupClip);
 
             Destroy(gameObject);
         }
