@@ -691,7 +691,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &4597572511842919972
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -720,6 +720,9 @@ MonoBehaviour:
   lookSensitivity: 4
   maxLook: 80
   minLook: -80
+  lookTransform: {fileID: 0}
+  focus: {fileID: 0}
+  NoFocus: {fileID: 0}
 --- !u!114 &4597572511842919977
 MonoBehaviour:
   m_ObjectHideFlags: 0

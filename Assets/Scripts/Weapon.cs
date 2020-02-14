@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
         muzzle = transform.Find("weapon/Muzzle");
 
         if (!muzzle)
-            muzzle = transform.Find("Main Camera/weapon/Muzzle");     
+            muzzle = transform.Find("Look/weapon/Muzzle");     
 
         else
             infinitAmmo = true;
