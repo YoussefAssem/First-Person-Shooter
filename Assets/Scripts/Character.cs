@@ -6,6 +6,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("stats")]
+    public float aimMoveSpeed;
     public float moveSpeed;
     public float jumpForce;
     public int currentHP;

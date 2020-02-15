@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     {
         gameManager = this;
 
+        Time.timeScale = 1.0f;
+        Cursor.lockState = CursorLockMode.Locked;
+
         BulletPool.PoolInit();
     }
 

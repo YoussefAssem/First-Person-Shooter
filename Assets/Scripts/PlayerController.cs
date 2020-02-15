@@ -15,12 +15,12 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Move(float horizontal, float vertical, bool jump, bool shoot)
+    public void Move(float horizontal, float vertical, bool jump, bool shoot,bool aim)
     {
         Vector3 moveDir = (transform.right * horizontal) + (transform.forward * vertical);
 
         moveDir.Normalize();
-        moveDir *= character.moveSpeed;
+        moveDir *= aim == true ? character.aimMoveSpeed : character.moveSpeed;
         moveDir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = moveDir;

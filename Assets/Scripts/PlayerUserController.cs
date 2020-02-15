@@ -37,13 +37,14 @@ public class PlayerUserController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         bool jump = Input.GetButtonDown("Jump");
         bool shoot = Input.GetButton("Fire1");
+        bool aim = Input.GetButton("Fire2");
 
-        playerController.Move(horizontal, vertical, jump,shoot);
+        playerController.Move(horizontal, vertical, jump,shoot,aim);
 
-        if (Input.GetButton("Fire2"))
+        if (aim)
             camera.transform.position = Vector3.Lerp(camera.transform.position, focus.transform.position,0.25f);
         else
-            camera.transform.position = Vector3.Lerp(camera.transform.position, NoFocus.transform.position, 0.25f);
+            camera.transform.position = Vector3.Lerp(camera.transform.position, NoFocus.transform.position, 0.25f); 
     }
 
     private void CamLook()
